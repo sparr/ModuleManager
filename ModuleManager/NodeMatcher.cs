@@ -14,6 +14,9 @@ namespace ModuleManager
         private readonly string[] namePatterns = null;
         private readonly string constraints = "";
 
+        // Only nodes of this type can match: ConfigNode.name is the type (e.g. PART), not the name value.
+        public string Type => type;
+
         public NodeMatcher(string type, string name, string constraints)
         {
             if (type == string.Empty) throw new ArgumentException("can't be empty", nameof(type));
