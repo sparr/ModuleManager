@@ -70,14 +70,14 @@ namespace ModuleManager.Patches
             IProtoUrlConfig protoConfig = listNode.Value;
             try
             {
-                if (!NodeMatcher.IsMatch(protoConfig.Node)) return;
+                if (!NodeMatcher.IsMatch(protoConfig)) return;
                 if (loop) logger.Info($"Looping on {UrlConfig.SafeUrl()} to {protoConfig.FullUrl}");
 
                 do
                 {
                     progress.ApplyingUpdate(protoConfig, UrlConfig);
                     listNode.Value = protoConfig = new ProtoUrlConfig(protoConfig.UrlFile, MMPatchLoader.ModifyNode(new NodeStack(protoConfig.Node), UrlConfig.config, context));
-                } while (loop && NodeMatcher.IsMatch(protoConfig.Node));
+                } while (loop && NodeMatcher.IsMatch(protoConfig));
 
                 if (loop) protoConfig.Node.RemoveNodes("MM_PATCH_LOOP");
             }
